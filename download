@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+.Python
+env/
+venv/
+.venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Model weights (too large for git)
+*.pt
+*.pth
+*.onnx
+!models/README.md
+
+# Secrets
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Ultralytics run artifacts
+runs/
+yolov8n.pt
