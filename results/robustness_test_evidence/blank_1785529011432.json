@@ -1,0 +1,23 @@
+{
+  "image_path": "data/robustness_test/blank.jpg",
+  "timestamp": "2026-07-31T20:16:49.925976+00:00",
+  "preprocessing": {
+    "valid": true,
+    "reason": "ok",
+    "warning": "low sharpness (0.0) \u2014 image may be too blurry for reliable detection"
+  },
+  "perception": {
+    "num_detections": 0,
+    "detections": []
+  },
+  "reasoning": {
+    "status": "NO_DETECTION",
+    "rule_fired": "R4: no relevant class detected",
+    "explanation": "No face/mask-related detections above the confidence threshold. The agent abstains rather than guessing a compliance status \u2014 this frame should be flagged for manual review."
+  },
+  "action": {
+    "annotated_image_saved_to": "results_robustness_test/images/blank_annotated.jpg"
+  },
+  "status": "NO_DETECTION",
+  "latency_sec": 1.506
+}

@@ -1,0 +1,11 @@
+{
+  "image_path": "data/robustness_test/tiny.jpg",
+  "timestamp": "2026-07-31T20:16:52.085160+00:00",
+  "preprocessing": {
+    "valid": false,
+    "reason": "image too small (10x10) to be useful",
+    "warning": null
+  },
+  "status": "SKIPPED_INVALID_INPUT",
+  "latency_sec": 0.0
+}

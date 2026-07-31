@@ -1,0 +1,11 @@
+{
+  "image_path": "data/robustness_test/corrupt.jpg",
+  "timestamp": "2026-07-31T20:16:51.432609+00:00",
+  "preprocessing": {
+    "valid": false,
+    "reason": "corrupt or unreadable image: cannot identify image file 'data/robustness_test/corrupt.jpg'",
+    "warning": null
+  },
+  "status": "SKIPPED_INVALID_INPUT",
+  "latency_sec": 0.652
+}
