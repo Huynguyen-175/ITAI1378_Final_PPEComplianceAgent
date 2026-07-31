@@ -1,0 +1,44 @@
+{
+  "image_path": "data/sample/caregiver_home_nomask.jpg",
+  "timestamp": "2026-07-31T20:16:33.567274+00:00",
+  "preprocessing": {
+    "valid": true,
+    "reason": "ok",
+    "warning": null
+  },
+  "perception": {
+    "num_detections": 2,
+    "detections": [
+      {
+        "class_name": "person",
+        "confidence": 0.9143,
+        "bbox_xyxy": [
+          210.0,
+          96.1,
+          781.6,
+          679.6
+        ]
+      },
+      {
+        "class_name": "chair",
+        "confidence": 0.4048,
+        "bbox_xyxy": [
+          275.5,
+          310.6,
+          349.1,
+          399.5
+        ]
+      }
+    ]
+  },
+  "reasoning": {
+    "status": "NO_DETECTION",
+    "rule_fired": "R4: no relevant class detected",
+    "explanation": "No face/mask-related detections above the confidence threshold. The agent abstains rather than guessing a compliance status \u2014 this frame should be flagged for manual review."
+  },
+  "action": {
+    "annotated_image_saved_to": "results/images/caregiver_home_nomask_annotated.jpg"
+  },
+  "status": "NO_DETECTION",
+  "latency_sec": 0.125
+}
