@@ -1,0 +1,10 @@
+
+--- Run at 2026-07-31T20:16:33.692546+00:00 ---
+Total images: 3
+  NO_DETECTION: 3
+Average latency: 0.759 sec/image
+
+--- Run at 2026-07-31T20:19:33.629162+00:00 ---
+Total images: 3
+  NO_DETECTION: 3
+Average latency: 0.587 sec/image
