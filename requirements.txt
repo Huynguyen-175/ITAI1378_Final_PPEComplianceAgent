@@ -3,6 +3,6 @@ opencv-python-headless==4.10.0.84
 numpy>=1.26.0
 pandas>=2.2.0
 matplotlib>=3.8.0
-gradio==4.44.0
+gradio>=4.44.0
 roboflow>=1.1.0
 jupyter>=1.0.0
