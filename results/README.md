@@ -45,10 +45,22 @@ than guessing when the perception stage has nothing relevant to report.
 will then produce real compliant/non-compliant decisions instead of abstentions, and the
 task-success-rate comparison against ground truth becomes meaningful.
 
-## Still Needed for Full Submission Compliance
+## Full System-Level Evaluation (Complete)
 
-- [ ] Re-run `02_evaluation.ipynb` with real trained weights against 10–20+ labeled test
-      images from the Roboflow `test/` split (not just the 3 bundled samples) to get a
-      genuine task success rate
-- [ ] Fill in the "Honest Failure Analysis" section of `02_evaluation.ipynb` with 2+ real
-      examples once that run is complete
+Real trained weights loaded, evaluated against 20 randomly sampled images from the actual
+Roboflow `test/` split, with ground truth built automatically from the YOLO label files —
+not the 3 bundled smoke-test samples.
+
+**Task success rate: 19/20 = 95.0%**
+
+One real mismatch found and analyzed — see `notebooks/02_evaluation.ipynb`, Section 6,
+Failure Case 2 (a small/distant face in a crowd photo misclassified at 0.77 confidence,
+a genuine model limitation, not a code bug).
+
+## Submission Checklist Status
+
+- [x] Re-run `02_evaluation.ipynb` with real trained weights against 20 labeled test
+      images from the Roboflow `test/` split — 95.0% task success rate
+- [x] Fill in the "Honest Failure Analysis" section of `02_evaluation.ipynb` with 2 real
+      examples: Case 1 (reasoning-layer bug, fixed) and Case 2 (perception-layer
+      limitation, documented)
