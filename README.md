@@ -86,10 +86,12 @@ Trained for 75 epochs on a Colab T4 GPU (~76.4 min total). Full log: `results/re
 
 ### System-Level (the agent as a whole)
 
-- **Task success rate**: demonstrated on 3 bundled sample images (`notebooks/02_evaluation.ipynb`); full 10–20 scenario evaluation requires the real trained weights (see `results/README.md` for current status and what's still needed)
+- **Task success rate**: real trained weights loaded, evaluated on 3 bundled sample images: **2/3 (66.7%)** — this sample size is too small to be a meaningful accuracy number on its own, but it surfaced a genuine, confirmed failure case (see below). Full 10–20 scenario evaluation against the Roboflow `test/` split is still needed for a statistically meaningful result (see `results/README.md`).
 - **Robustness**: verified — corrupt files and undersized images are caught at the preprocessing stage and skipped without crashing the batch; blank-but-valid images are processed normally and correctly return `NO_DETECTION` rather than a guessed answer (evidence in `results/robustness_test_evidence/`)
 - **Efficiency**: ~0.7–2.0 sec/image on CPU in the test environment (see `results/metrics.txt`); faster on GPU
-- **Failure analysis**: see `notebooks/02_evaluation.ipynb`, Section 5
+- **Failure analysis**: 1 real, confirmed failure case documented with root cause and proposed fix — see `notebooks/02_evaluation.ipynb`, Section 6. A second case is still needed from the full test-set evaluation.
+
+> **Real finding worth highlighting:** on `data/sample/caregiver_clinic_masked.jpg`, the agent correctly detected two real masks at high confidence (0.90, 0.87) but a spurious low-confidence (0.55) `without_mask` detection on an unrelated object (an ID badge, not a face) flipped the entire frame's verdict to NON_COMPLIANT. This exposed a real design gap in the reasoning layer — Rule R1 currently gives equal veto power to any-confidence violations. Full root-cause + proposed fix in `notebooks/02_evaluation.ipynb`, Section 6.
 
 Full breakdown of what's real trained-model evidence vs. pipeline-mechanics validation: [`results/README.md`](results/README.md).
 
