@@ -141,6 +141,10 @@ And a non-compliant example (`results/demo_non_compliant_1_realmodel.png`):
 For a machine-generated trace showing the full pipeline mechanics (ingestion → preprocessing →
 logging), including runs on fallback weights, see the actual JSON files in `results/traces/`.
 
+## Demo Video
+
+[Watch the demo](https://drive.google.com/file/d/1dgtzR1kOrKb_v8upfHYF52VVi7JrH2T2/view?usp=drive_link) — walks through the agent's perceive → reason → act pipeline live via the Gradio interface, including the real reasoning-layer bug found during evaluation (Failure Case 1) and its before/after fix.
+
 ## Key Learnings
 
 - **What worked well**: rule-based reasoning made every decision fully inspectable — no ambiguity about why the agent flagged something, which matters a lot for a compliance use case
