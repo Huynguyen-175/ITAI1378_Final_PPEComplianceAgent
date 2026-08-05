@@ -86,12 +86,14 @@ Trained for 75 epochs on a Colab T4 GPU (~76.4 min total). Full log: `results/re
 
 ### System-Level (the agent as a whole)
 
-- **Task success rate**: real trained weights loaded, evaluated on 3 bundled sample images: **2/3 (66.7%)** — this sample size is too small to be a meaningful accuracy number on its own, but it surfaced a genuine, confirmed failure case (see below). Full 10–20 scenario evaluation against the Roboflow `test/` split is still needed for a statistically meaningful result (see `results/README.md`).
+- **Task success rate: 19/20 (95.0%)** — evaluated on a real, randomly sampled 20-image test set from the Roboflow `test/` split, with ground truth built automatically from the actual YOLO label files (not hand-typed). See `notebooks/02_evaluation.ipynb`, Section 3b, for the full run and methodology.
 - **Robustness**: verified — corrupt files and undersized images are caught at the preprocessing stage and skipped without crashing the batch; blank-but-valid images are processed normally and correctly return `NO_DETECTION` rather than a guessed answer (evidence in `results/robustness_test_evidence/`)
-- **Efficiency**: ~0.7–2.0 sec/image on CPU in the test environment (see `results/metrics.txt`); faster on GPU
-- **Failure analysis**: 1 real, confirmed failure case documented with root cause and proposed fix — see `notebooks/02_evaluation.ipynb`, Section 6. A second case is still needed from the full test-set evaluation.
+- **Efficiency**: measured on the real 20-image evaluation run (see `results/metrics.txt` for exact figures)
+- **Failure analysis**: 2 real, confirmed failure cases documented — one reasoning-layer bug (found and fixed) and one perception-layer limitation (found and root-caused). See `notebooks/02_evaluation.ipynb`, Section 6.
 
 > **Real finding, fixed and verified:** on `data/sample/caregiver_clinic_masked.jpg`, the agent correctly detected two real masks at high confidence (0.90, 0.87) but a spurious low-confidence (0.55) `without_mask` detection on an unrelated object (an ID badge, not a face) flipped the entire frame's verdict to NON_COMPLIANT. This exposed a real design gap in the reasoning layer. **Fix shipped in `agents/reasoning.py`:** violation classes now require ≥0.65 confidence to override a `with_mask` detection; re-running this exact case through the fix now correctly returns COMPLIANT. Regression-tested against real violation cases to confirm nothing else broke. Full writeup in `notebooks/02_evaluation.ipynb`, Section 6.
+
+> **Second finding (perception-layer, not yet fixed):** the one real miss in the 20-image evaluation was a high-confidence (0.77) false positive whose bounding box, visually confirmed against the annotated output, lines up with a small decorative watermark/logo in the image corner — not the person's face, which was actually masked correctly. Notably, this false positive was NOT caught by the Case 1 confidence-floor fix, since 0.77 clears the 0.65 bar — confidence alone can't distinguish a confident-but-wrong detection from a genuine one. Same error *category* as Case 1 (spurious detection on a small non-face object), different specific object. Flagged as future work: either more training exposure to watermarked/logo'd images, or a face-plausibility heuristic as a second filter beyond raw confidence.
 
 Full breakdown of what's real trained-model evidence vs. pipeline-mechanics validation: [`results/README.md`](results/README.md).
 
